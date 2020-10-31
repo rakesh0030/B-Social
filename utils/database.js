@@ -4,16 +4,32 @@ const constants = require('./constants');
 
 const mongoClient = mongodb.MongoClient;
 
+let _db;
+
 const monogoConnect = (callback) => {
-  mongoClient.connect(constant.MONGOURI)
-  .then((resp)=>{
+  mongoClient.connect(constants.MONGOURI)
+  .then((client)=>{
     //console.log("Response",resp);
     console.log("Mongo DB Successfully connected!!");
-    callback(resp);
+    _db = client.db();
+    callback(client);
   })
   .catch((err)=>{
     console.log("Error in connecting",err);
   })
 }
 
-module.exports = monogoConnect;
+const getDb = ()=>{
+  if(_db){
+    return _db;
+  }
+  else{
+    throw 'No Database found';
+  }
+}
+
+module.exports ={ 
+  monogoConnect : monogoConnect,
+  getDb : getDb
+  
+};
