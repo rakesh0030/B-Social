@@ -3,6 +3,7 @@ const express = require('express');
 const db = require('./utils/database');
 
 const authRoutes = require('./routes/auth');
+const postRoutes = require('./routes/posts');
 
 
 const app = express();
@@ -16,6 +17,7 @@ const middleware = (req,res,next)=>{
 app.use(express.json());
 
 app.use('/auth',authRoutes);
+app.use('/posts/',postRoutes);
 
 app.get('/',middleware,(req,res,next)=>{
   res.send("Hello word");

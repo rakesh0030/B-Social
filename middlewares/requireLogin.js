@@ -22,6 +22,7 @@ const requireLogin = (req,res,next) => {
         else{
           // if the JWT is valid, allow them to hit
           // the intended endpoint
+          req.user_id = user._id;
           return next();
         }
     });
