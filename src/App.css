@@ -1,38 +1,34 @@
-.App {
-  text-align: center;
+.NavBar{
+  height : 100px;
+  background-color: black !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#logo{
+  object-fit: cover;
+  height: 100px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#logoTypoGraphy{
+  align-self: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.SignInCard{
+  margin: 200px auto;
+  width: 400px;
 }
 
-.App-link {
-  color: #61dafb;
+.TextField{
+  width:100%;
+  margin: 10px !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.CardHeader{
+  font-weight: bold;
 }
+
+.App{
+  padding: 0 20%;
+}
+
+
+/*  */
