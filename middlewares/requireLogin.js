@@ -6,6 +6,7 @@ const dirName = path.dirname(__dirname);
 
 const requireLogin = (req,res,next) => {
   const privateKey = fs.readFileSync(dirName + '/utils/private.pem');
+  console.log("Req header is ",req.headers);
   if (typeof req.headers.authorization !== "undefined") {
     // retrieve the authorization header and parse out the
     // JWT using the split function

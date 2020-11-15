@@ -20,6 +20,7 @@ const mongodb = require('mongodb');
 
 
 exports.createPost = (req,res,next) => {
+  console.log("create post called");
   try {
     const { postBody,image,creationDate} = req.body;
     const userID = req.user_id;

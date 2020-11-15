@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const db = require('./utils/database');
 
@@ -16,6 +17,8 @@ const middleware = (req,res,next)=>{
 
 app.use(express.json());
 
+app.use(cors())
+
 app.use('/auth',authRoutes);
 app.use('/posts/',postRoutes);
 
@@ -24,10 +27,12 @@ app.get('/',middleware,(req,res,next)=>{
   next();
 })
 
+const port = 8000;
+
 db.monogoConnect((resp)=>{
   // console.log("Response is",resp);
-  app.listen('3000',()=>{
-    console.log('server running');
+  app.listen(port,()=>{
+    console.log('server running on port ',port);
   })
 })
 
