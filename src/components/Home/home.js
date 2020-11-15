@@ -33,7 +33,7 @@ const Home =()=>{
           >
           </img>
         </div>
-        <div class="card-content">
+        <div className="card-content">
           <h6>Title</h6>
           <p>this is amazing post.</p>
           <input type="text" placeholder="Add a comment" className="input-field"></input>
@@ -48,7 +48,7 @@ const Home =()=>{
           >
           </img>
         </div>
-        <div class="card-content">
+        <div className="card-content">
           <h6>Title</h6>
           <p>this is amazing post.</p>
           <i className={favIconClasses.join(" ")} onDoubleClick={postLiked}>favorite</i>
