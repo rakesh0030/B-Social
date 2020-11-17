@@ -32,3 +32,22 @@
   float: right;
   display: inline;
 }
+
+.deleteIcon{
+  display: inline;
+  align-self: center;
+  cursor: pointer;
+}
+
+.postAuthorBlock{
+  display:flex;
+  justify-content:space-between
+}
+
+
+
+.otherUserProfileLink {
+  all: unset !important;
+  color: black !important;
+  cursor: pointer !important;
+}

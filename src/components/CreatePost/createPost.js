@@ -73,6 +73,7 @@ const CreatePost =()=>{
           <div className="file-path-wrapper">
             <input className="file-path validate" type="text" />
           </div>
+          <br></br>
           <div className="center">
             <img src={imgURL} alt="No image selected" id="previewImage"
             />

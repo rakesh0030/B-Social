@@ -1,10 +1,12 @@
-import {React,useState} from 'react';
+import {React,useState,useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import M from 'materialize-css';
 import axios from 'axios';
+import {UserContext} from '../../../App';
 import './styles/Login.css'
 
 const Login =()=>{
+  const {state,dispatch} = useContext(UserContext);
   const history = useHistory();
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
@@ -22,6 +24,11 @@ const Login =()=>{
         console.log('Response is',res);
         console.log(res.data.token);
         localStorage.setItem("jwt",res.data.token);
+        localStorage.setItem("user",JSON.stringify(res.data.userDetails));
+        /*
+          dispatching the user details will set the payload of reducer.
+        */
+        dispatch({type:"USER",payload:res.data.userDetails});
         history.push('/');
       })
       .catch((err)=>{
