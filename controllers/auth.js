@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
 
+const constants = require('../config/constants');
+
 const {getDb} = require('../utils/database');
 
 exports.protected = (req,res,next) =>{
@@ -80,7 +82,8 @@ exports.signIn = (req,res,next) => {
           if(isMatch){
             //CREATING JWT
             const dirName = path.dirname(__dirname);
-            const privateKey = fs.readFileSync(dirName + '/utils/private.pem','utf-8');
+            //const privateKey = fs.readFileSync(dirName + '/utils/private.pem','utf-8');
+            const privateKey = constants.privateKey;
             const token = jwt.sign({_id : userDetails._id},privateKey);
             const userDetailsToBeSend = {
               _id : userDetails._id,

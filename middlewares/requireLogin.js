@@ -2,10 +2,13 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const fs = require('fs');
 
+const constants = require('../config/constants');
+
 const dirName = path.dirname(__dirname);
 
 const requireLogin = (req,res,next) => {
-  const privateKey = fs.readFileSync(dirName + '/utils/private.pem');
+  //const privateKey = fs.readFileSync(dirName + '/utils/private.pem');
+  const privateKey = constants.privateKey;
   console.log("Req header is ",req.headers);
   if (typeof req.headers.authorization !== "undefined") {
     // retrieve the authorization header and parse out the

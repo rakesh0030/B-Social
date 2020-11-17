@@ -3,6 +3,8 @@ const cors = require('cors');
 
 const db = require('./utils/database');
 
+const path = require('path');
+
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/posts');
 const userDetailsRoutes = require('./routes/user');
@@ -29,7 +31,14 @@ app.get('/',middleware,(req,res,next)=>{
   next();
 })
 
-const port = 8000;
+let port = process.env.PORT || 8000;
+
+if(process.env.NODE_ENV == "production"){
+  app.use(express.static('client/build'));
+  app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+  })
+}
 
 db.monogoConnect((resp)=>{
   // console.log("Response is",resp);

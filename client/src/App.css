@@ -1,0 +1,34 @@
+.NavBar{
+  height : 100px;
+  background-color: black !important;
+}
+
+#logo{
+  object-fit: cover;
+  height: 100px;
+}
+
+#logoTypoGraphy{
+  align-self: center;
+}
+
+.SignInCard{
+  margin: 200px auto;
+  width: 400px;
+}
+
+.TextField{
+  width:100%;
+  margin: 10px !important;
+}
+
+.CardHeader{
+  font-weight: bold;
+}
+
+.App{
+  padding: 0 20%;
+}
+
+
+/*  */

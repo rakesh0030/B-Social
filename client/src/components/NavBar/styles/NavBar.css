@@ -1,0 +1,26 @@
+nav div{
+  height: 70px !important;
+}
+
+a {
+  color : white !important;
+  height: 70px !important;
+  font-size: 1.2rem !important;
+}
+
+a:hover{
+  background-color: rgb(211,211,211,0.3) !important;
+}
+
+#logo{
+  object-fit: cover;
+  height: 70px;
+}
+
+.NavBar {
+  height: 70px !important;
+  padding: 0 20%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
