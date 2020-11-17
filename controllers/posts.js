@@ -1,6 +1,7 @@
 
 const {getDb} = require('../utils/database');
 const mongodb = require('mongodb');
+const { response } = require('express');
 
 //Post structure
 /*
@@ -9,8 +10,9 @@ const mongodb = require('mongodb');
   authorName = string
   image = string(URI)
   comment = [{
-    author = _id,
-    text = string
+    authorID = _id,
+    authorName = string,
+    content = string
   }]
   likes = [
     _id
@@ -102,6 +104,135 @@ exports.deletePost = (req,res,next) => {
         res.status(err.message).send(err.status);
       })
     
+  }
+  catch (err) {
+    console.log(err);
+    res.status(err.message).send(err.status);
+  }
+}
+
+exports.loadAllPosts = (req,res,next) => {
+  try {
+    const db = getDb();
+    db.collection('Posts').find({}).toArray()
+      .then((r) => {
+        res.status(200).send(r);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
+  }
+  catch (err) {
+    console.log(err);
+    res.status(err.message).send(err.status);
+  }
+}
+
+
+exports.loadUserPosts = (req,res,next) => {
+  try {
+    const db = getDb();
+    db.collection('Posts').find({authorID : req.user_id},{projection : {
+      authorID : 0
+    }}).toArray()
+      .then((r) => {
+        res.status(200).send(r);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
+  }
+  catch (err) {
+    console.log(err);
+    res.status(err.message).send(err.status);
+  }
+}
+
+exports.loadOtherUserPosts = (req,res,next) => {
+  try {
+    const db = getDb();
+    console.log(req.params.userID);
+    db.collection('Posts').find({authorID : req.params.userID},{projection : {
+      authorID : 0
+    }}).toArray()
+      .then((r) => {
+        res.status(200).send(r);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
+  }
+  catch (err) {
+    console.log(err);
+    res.status(err.message).send(err.status);
+  }
+}
+
+
+
+exports.registerLikeForPost = (req,res,next) => {
+  try {
+    const db = getDb();
+    console.log("Request Object is ",req.body);
+    db.collection('Posts').updateOne({_id: mongodb.ObjectID(req.body.postID)},{
+      '$push' : {'likes' : req.user_id}
+    })
+      .then((r) => {
+        res.status(200).send(r);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
+  }
+  catch (err) {
+    console.log(err);
+    res.status(err.message).send(err.status);
+  }
+}
+
+
+
+exports.registerDislikeForPost = (req,res,next) => {
+  try {
+    const db = getDb();
+    console.log("Request Object is ",req.body);
+    db.collection('Posts').updateOne({_id: mongodb.ObjectID(req.body.postID)},{
+      '$pull' : {'likes' : req.user_id}
+    })
+      .then((r) => {
+        res.status(200).send(r);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
+  }
+  catch (err) {
+    console.log(err);
+    res.status(err.message).send(err.status);
+  }
+}
+
+
+
+exports.registerCommentForPost = (req,res,next) => {
+  try {
+    const db = getDb();
+    console.log("Request Object is ",req.body);
+    db.collection('Posts').updateOne({_id: mongodb.ObjectID(req.body.postID)},{
+      '$push' : {'comment' : req.body.commentMade}
+    })
+      .then((r) => {
+        res.status(200).send(r);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      })
   }
   catch (err) {
     console.log(err);

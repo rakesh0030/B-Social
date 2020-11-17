@@ -11,7 +11,7 @@ exports.protected = (req,res,next) =>{
 
 exports.signUp = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password ,profilePic} = req.body;
     if (!name || !email || !password)
       throw {
         message: "Require name,email and password for signup.",
@@ -30,7 +30,11 @@ exports.signUp = async (req, res, next) => {
         return db.collection('Users').insertOne({
           name,
           email,
-          password: hashedPassword
+          password: hashedPassword,
+          profilePic,
+          followers : [],
+          following : [],
+          description : ""
         });
       })
       .then((r) => {
@@ -78,7 +82,17 @@ exports.signIn = (req,res,next) => {
             const dirName = path.dirname(__dirname);
             const privateKey = fs.readFileSync(dirName + '/utils/private.pem','utf-8');
             const token = jwt.sign({_id : userDetails._id},privateKey);
-            return res.status(200).json({token : token});
+            const userDetailsToBeSend = {
+              _id : userDetails._id,
+              name : userDetails.name,
+              email : userDetails.email
+            }
+            return res.status(200).json(
+              {
+                token,
+                userDetails : userDetailsToBeSend
+              }
+            );
           }
           else{
             throw {

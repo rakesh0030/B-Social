@@ -5,6 +5,7 @@ const db = require('./utils/database');
 
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/posts');
+const userDetailsRoutes = require('./routes/user');
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(cors())
 
 app.use('/auth',authRoutes);
 app.use('/posts/',postRoutes);
+app.use('/user/',userDetailsRoutes);
 
 app.get('/',middleware,(req,res,next)=>{
   res.send("Hello word");
