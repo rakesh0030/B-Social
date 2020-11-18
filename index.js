@@ -26,10 +26,10 @@ app.use('/auth',authRoutes);
 app.use('/posts/',postRoutes);
 app.use('/user/',userDetailsRoutes);
 
-app.get('/',middleware,(req,res,next)=>{
-  res.send("Hello word");
-  next();
-})
+// app.get('/',middleware,(req,res,next)=>{
+//   res.send("Hello word");
+//   next();
+// })
 
 let port = process.env.PORT || 8000;
 
